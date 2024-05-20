@@ -9,6 +9,7 @@ environment:
 # Add regular dependencies here.
 dependencies:
   # path: ^1.8.0
+  rust_core: ^0.5.1
 
 dev_dependencies:
   lints: ^3.0.0

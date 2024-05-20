@@ -1,9 +1,9 @@
-import 'package:rust_std/vec.dart';
+import 'vec.dart';
 
 /// Creates an iterator which uses a closure to determine if an element should be removed.
 /// If the closure returns true, then the element is removed and yielded. If the closure returns false,
 /// the element will remain in the vector and will not be yielded by the iterator.
-class ExtractIfIterator<T extends Object> implements Iterator<T> {
+class ExtractIfIterator<T> implements Iterator<T> {
   final Vec<T> _vec;
   int _index = 0;
   final bool Function(T) _test;
@@ -30,7 +30,7 @@ class ExtractIfIterator<T extends Object> implements Iterator<T> {
   T get current => _current;
 }
 
-class ExtractIfIterable<T extends Object> extends Iterable<T> {
+class ExtractIfIterable<T> extends Iterable<T> {
   final Vec<T> vec;
   final bool Function(T) _test;
 

@@ -1,8 +1,9 @@
 
-import 'package:rust_std/slice.dart';
+import 'package:rust_core/slice.dart';
+import 'package:rust_core/option.dart';
 import 'package:test/test.dart';
 
-import 'package:rust_std/vec.dart';
+import 'package:vec/vec.dart';
 
 main() {
   test("append", () {

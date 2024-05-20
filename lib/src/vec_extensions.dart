@@ -1,4 +1,4 @@
-import 'package:rust_std/vec.dart';
+import 'vec.dart';
 
 extension VecOnIterableExtension<T extends Object> on Iterable<T> {
   Vec<T> toVec() {
