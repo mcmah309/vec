@@ -6,7 +6,6 @@ import 'extract_if.dart';
 
 /// A contiguous **growable** array type, written as Vec<T>, short for ‘vector’.
 extension type Vec<T>._(List<T> list) implements Iterable<T> {
-
   @pragma('vm:prefer-inline')
   Vec([List<T>? vec]) : list = vec ?? [];
 
@@ -18,7 +17,8 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
   Vec.empty() : list = [];
 
   @pragma('vm:prefer-inline')
-  Vec.filled(int length, T val) : list = List.filled(length, val, growable: true);
+  Vec.filled(int length, T val)
+      : list = List.filled(length, val, growable: true);
 
   @pragma('vm:prefer-inline')
   Vec.from(Iterable other) : list = List.from(other, growable: true);
@@ -134,7 +134,8 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
   /// If the closure returns true, then the element is removed and yielded. If the closure returns false,
   /// the element will remain in the vector and will not be yielded by the iterator.
   @pragma('vm:prefer-inline')
-  RIterator<T> extractIf(bool Function(T) f) => RIterator.fromIterable(ExtractIfIterable(this, f));
+  RIterator<T> extractIf(bool Function(T) f) =>
+      RIterator.fromIterable(ExtractIfIterable(this, f));
 
 // from_raw_parts: will not be implemented, not possible
 // from_raw_parts_in: will not be implemented, not possible
@@ -334,14 +335,16 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
   // bool every(bool Function(T) f) => list.every(f);
 
   @pragma('vm:prefer-inline')
-  RIterator<U> expand<U>(Iterable<U> Function(T) f) => RIterator.fromIterable(list.expand(f));
+  RIterator<U> expand<U>(Iterable<U> Function(T) f) =>
+      RIterator.fromIterable(list.expand(f));
 
   // T firstWhere(bool Function(T) f, {T Function()? orElse}) => list.firstWhere(f, orElse: orElse);
 
   // U fold<U>(U initialValue, U Function(U previousValue, T element) f) => list.fold(initialValue, f);
 
   @pragma('vm:prefer-inline')
-  RIterator<T> followedBy(Iterable<T> other) => RIterator.fromIterable(list.followedBy(other));
+  RIterator<T> followedBy(Iterable<T> other) =>
+      RIterator.fromIterable(list.followedBy(other));
 
   // void forEach(void Function(T) f) => list.forEach(f);
 
@@ -360,13 +363,15 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
   RIterator<T> skip(int count) => RIterator.fromIterable(list.skip(count));
 
   @pragma('vm:prefer-inline')
-  RIterator<T> skipWhile(bool Function(T) f) => RIterator.fromIterable(list.skipWhile(f));
+  RIterator<T> skipWhile(bool Function(T) f) =>
+      RIterator.fromIterable(list.skipWhile(f));
 
   @pragma('vm:prefer-inline')
   RIterator<T> take(int count) => RIterator.fromIterable(list.take(count));
 
   @pragma('vm:prefer-inline')
-  RIterator<T> takeWhile(bool Function(T) f) => RIterator.fromIterable(list.takeWhile(f));
+  RIterator<T> takeWhile(bool Function(T) f) =>
+      RIterator.fromIterable(list.takeWhile(f));
 
   // List<T> toList({bool growable = true}) => list.toList(growable: growable);
 
@@ -375,7 +380,8 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
   // String toString() => list.toString();
 
   @pragma('vm:prefer-inline')
-  RIterator<T> where(bool Function(T) f) => RIterator.fromIterable(list.where(f));
+  RIterator<T> where(bool Function(T) f) =>
+      RIterator.fromIterable(list.where(f));
 
   @pragma('vm:prefer-inline')
   RIterator<U> whereType<U>() => RIterator.fromIterable(list.whereType<U>());

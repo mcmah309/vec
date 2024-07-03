@@ -1,4 +1,3 @@
-
 import 'package:rust_core/slice.dart';
 import 'package:rust_core/option.dart';
 import 'package:test/test.dart';
