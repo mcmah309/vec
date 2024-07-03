@@ -1,4 +1,8 @@
 # Vec
+[![Pub Version](https://img.shields.io/pub/v/vec.svg)](https://pub.dev/packages/vec)
+[![Dart Package Docs](https://img.shields.io/badge/documentation-pub.dev-blue.svg)](https://pub.dev/documentation/vec/latest/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://github.com/mcmah309/vec/actions/workflows/ci.yml/badge.svg)](https://github.com/mcmah309/vec/actions)
 
 A Dart implementation of Rust's `Vec` type, a contiguous **growable** array. Unlike `List` which is growable or non-growable.
 `Vec` is built on [rust_core](https://github.com/mcmah309/rust_core) and is a nice compliment to its `Arr` (array) type.
