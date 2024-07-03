@@ -6,17 +6,20 @@ import 'package:rust_core/option.dart';
 
 import 'extract_if.dart';
 
-
+/// A contiguous **growable** array type, written as Vec<T>, short for ‘vector’.
 extension type Vec<T>._(List<T> list) implements Iterable<T> {
   Vec(this.list);
 
+  @pragma('vm:prefer-inline')
   T operator [](int index) => list[index];
 
+  @pragma('vm:prefer-inline')
   operator []=(int index, T value) => list[index] = value;
 
 // allocator: will not be implemented
 
   /// Adds all of other's elements to this Vec.
+  @pragma('vm:prefer-inline')
   void append(Vec<T> other) {
     list.addAll(other.list);
   }
@@ -26,11 +29,13 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
 // as_ptr: will not be implemented
 
   /// Returns a slice of the Vec from the start index to the end index.
+  @pragma('vm:prefer-inline')
   Slice<T> asSlice() => Slice.fromList(list);
 
 // capacity: will not be implemented, not possible
 
   /// Clears the Vec, removing all values.
+  @pragma('vm:prefer-inline')
   void clear() => list.clear();
 
 // clone: will not be implemented, not possible
@@ -90,6 +95,7 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
   }
 
   /// Removes the element at the given index from the Vec and returns it.
+  @pragma('vm:prefer-inline')
   Vec<T> drain(int start, int end) {
     final range = list.getRange(start, end).toList(growable: false);
     list.removeRange(start, end);
@@ -97,11 +103,13 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
   }
 
   /// Appends all elements in a slice to the Vec.
+  @pragma('vm:prefer-inline')
   void extendFromSlice(Slice<T> slice) {
     list.addAll(slice);
   }
 
   // Appends all the elements in range to the end of the vector.
+  @pragma('vm:prefer-inline')
   void extendFromWithin(int start, int end) {
     list.addAll(list.getRange(start, end));
   }
@@ -109,6 +117,7 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
   /// Creates an [RIterator] which uses a closure to determine if an element should be removed.
   /// If the closure returns true, then the element is removed and yielded. If the closure returns false,
   /// the element will remain in the vector and will not be yielded by the iterator.
+  @pragma('vm:prefer-inline')
   RIterator<T> extractIf(bool Function(T) f) =>
       RIterator.fromIterable(ExtractIfIterable(this, f));
 
@@ -116,6 +125,7 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
 // from_raw_parts_in: will not be implemented, not possible
 
   /// Inserts an element at position index within the vector, shifting all elements after it to the right.
+  @pragma('vm:prefer-inline')
   void insert(int index, T element) {
     list.insert(index, element);
   }
@@ -128,12 +138,14 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
 // leak: will not be implemented, not possible
 
   /// Returns the length of the Vec.
+  @pragma('vm:prefer-inline')
   int len() => list.length;
 
 // new: will not not implement, already has a constructor
 // new_in: will not implement, not possible
 
   /// Removes the last element from the Vec and returns it, or None if it is empty.
+  @pragma('vm:prefer-inline')
   Option<T> pop() {
     if (list.isEmpty) {
       return None;
@@ -142,11 +154,13 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
   }
 
   /// Appends an element to the end of the Vec.
+  @pragma('vm:prefer-inline')
   void push(T element) => list.add(element);
 
 // push_within_capacity: will not implement, no point
 
   /// Removes the element at the given index from the Vec. Will throw if out of bounds.
+  @pragma('vm:prefer-inline')
   T remove(int index) => list.removeAt(index);
 
 // reserve: Will not implement, would require another param to keep track of allocation vs vec size
@@ -183,6 +197,7 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
   }
 
   /// Retains only the elements specified by the predicate where the result is true.
+  @pragma('vm:prefer-inline')
   void retain(bool Function(T) f) {
     list.retainWhere(f);
   }
@@ -224,6 +239,7 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
   }
 
   /// Shortens the vector, keeping the first len elements and dropping the rest.
+  @pragma('vm:prefer-inline')
   void truncate(int newLen) {
     list.length = newLen;
   }
@@ -234,12 +250,14 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
 
   //************************************************************************//
 
+  @pragma('vm:prefer-inline')
   RIterator<T> iter() => RIterator.fromIterable(list);
 
   // Iterable: Overriding iterable methods
   //************************************************************************//
 
   /// Returns the first element of an iterator, None if empty.
+  @pragma('vm:prefer-inline')
   Option<T> first() {
     final first = list.firstOrNull;
     if (first == null) {
@@ -249,14 +267,18 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
   }
 
   /// Returns true if the iterator is empty, false otherwise.
+  @pragma('vm:prefer-inline')
   bool isEmpty() => list.isEmpty;
 
   /// Returns true if the iterator is not empty, false otherwise.
+  @pragma('vm:prefer-inline')
   bool isNotEmpty() => list.isNotEmpty;
 
+  @pragma('vm:prefer-inline')
   Iterator<T> get iterator => list.iterator;
 
   /// Returns the last element of an iterator, None if empty.
+  @pragma('vm:prefer-inline')
   Option<T> last() {
     final last = list.lastOrNull;
     if (last == null) {
@@ -266,9 +288,11 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
   }
 
   /// Returns the length of an iterator.
+  @pragma('vm:prefer-inline')
   int length() => list.length;
 
   /// Returns the single element of an iterator, None if this is empty or has more than one element.
+  @pragma('vm:prefer-inline')
   Option<T> single() {
     final firstTwo = list.take(2).iterator;
     if (!firstTwo.moveNext()) {
@@ -285,6 +309,7 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
   //   return list.any(f);
   // }
 
+  @pragma('vm:prefer-inline')
   RIterator<U> cast<U>() => RIterator.fromIterable(list.cast<U>());
 
   // bool contains(Object? element) => list.contains(element);
@@ -293,6 +318,7 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
 
   // bool every(bool Function(T) f) => list.every(f);
 
+  @pragma('vm:prefer-inline')
   RIterator<U> expand<U>(Iterable<U> Function(T) f) =>
       RIterator.fromIterable(list.expand(f));
 
@@ -300,6 +326,7 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
 
   // U fold<U>(U initialValue, U Function(U previousValue, T element) f) => list.fold(initialValue, f);
 
+  @pragma('vm:prefer-inline')
   RIterator<T> followedBy(Iterable<T> other) =>
       RIterator.fromIterable(list.followedBy(other));
 
@@ -309,19 +336,24 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
 
   // T lastWhere(bool Function(T) f, {T Function()? orElse}) => list.lastWhere(f, orElse: orElse);
 
+  @pragma('vm:prefer-inline')
   RIterator<U> map<U>(U Function(T) f) => RIterator.fromIterable(list.map(f));
 
   // T reduce(T Function(T, T) f) => list.reduce(f);
 
   // T singleWhere(bool Function(T) f, {T Function()? orElse}) => list.singleWhere(f, orElse: orElse);
 
+  @pragma('vm:prefer-inline')
   RIterator<T> skip(int count) => RIterator.fromIterable(list.skip(count));
 
+  @pragma('vm:prefer-inline')
   RIterator<T> skipWhile(bool Function(T) f) =>
       RIterator.fromIterable(list.skipWhile(f));
 
+  @pragma('vm:prefer-inline')
   RIterator<T> take(int count) => RIterator.fromIterable(list.take(count));
 
+  @pragma('vm:prefer-inline')
   RIterator<T> takeWhile(bool Function(T) f) =>
       RIterator.fromIterable(list.takeWhile(f));
 
@@ -331,8 +363,10 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
 
   // String toString() => list.toString();
 
+  @pragma('vm:prefer-inline')
   RIterator<T> where(bool Function(T) f) =>
       RIterator.fromIterable(list.where(f));
 
+  @pragma('vm:prefer-inline')
   RIterator<U> whereType<U>() => RIterator.fromIterable(list.whereType<U>());
 }
