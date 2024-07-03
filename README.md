@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://github.com/mcmah309/vec/actions/workflows/ci.yml/badge.svg)](https://github.com/mcmah309/vec/actions)
 
-A Dart implementation of Rust's `Vec` type, a contiguous **growable** array. Unlike `List` which is growable or non-growable.
+A zero cost extension type of `List`, representing a contiguous **growable** array. Unlike `List` which is growable or non-growable.
 `Vec` is built on [rust_core](https://github.com/mcmah309/rust_core) and is a nice compliment to its `Arr` (array) type.
 
 ## Usage
@@ -14,6 +14,8 @@ import 'package:vec/vec.dart';
 
 void main() {
   Vec<int> vec = Vec(); // or e.g. Vec([1, 2, 3, 4])
+  List<int> list = vec.list; // easily translate back and forth
+  Vec<int> vec = Vec(list);
 
   vec.push(5);
 
