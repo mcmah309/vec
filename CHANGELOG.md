@@ -1,3 +1,7 @@
+## 0.2.1
+
+- Doc update
+
 ## 0.2.0
 
 - Update `rust_core`
