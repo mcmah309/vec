@@ -6,7 +6,9 @@ import 'extract_if.dart';
 
 /// A contiguous **growable** array type, written as Vec<T>, short for ‘vector’.
 extension type Vec<T>._(List<T> list) implements Iterable<T> {
-  Vec(this.list);
+
+  @pragma('vm:prefer-inline')
+  Vec([List<T>? vec]) : list = vec ?? [];
 
   @pragma('vm:prefer-inline')
   Vec.generate(int length, T Function(int i) generator)
