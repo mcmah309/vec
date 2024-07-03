@@ -1,6 +1,6 @@
 name: vec
-description: A zero cost vector type
-version: 0.1.0
+description: A zero cost growable vector type
+version: 0.2.0
 repository: https://github.com/mcmah309/vec
 
 environment:
