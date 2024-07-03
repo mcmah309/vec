@@ -4,8 +4,9 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://github.com/mcmah309/vec/actions/workflows/ci.yml/badge.svg)](https://github.com/mcmah309/vec/actions)
 
-A zero cost extension type of `List`, representing a contiguous **growable** array. Unlike `List` which is growable or non-growable.
-`Vec` is built on [rust_core](https://github.com/mcmah309/rust_core) and is a nice compliment to its `Arr` (array) type.
+A zero cost extension type of `List`, representing a contiguous **growable** array. Unlike `List` which is growable or non-growable,
+which may cause runtime exceptions. `Vec` adds new useful methods to the regular `List` type.
+It is built on [rust_core](https://github.com/mcmah309/rust_core) and is a nice compliment to its `Arr` (array) type.
 
 ## Usage
 
@@ -25,15 +26,7 @@ void main() {
 
   vec.resize(10, 0);
 
-  vec.forEach((element) {
-    print(element);
-  });
-
-  // Use custom iterator to extract elements based on a condition
-  var iterator = vec.extractIf((element) => element % 2 == 0);
-  iterator.forEach((element) {
-    print('Extracted: $element');
-  });
+  RIterator<T> iterator = vec.extractIf((element) => element % 2 == 0);
 
   Vec<T> spliced = vec.splice(start, end, replaceWith);
 
