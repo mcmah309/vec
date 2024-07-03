@@ -16,7 +16,13 @@ extension type Vec<T>._(List<T> list) implements Iterable<T> {
   Vec.empty() : list = [];
 
   @pragma('vm:prefer-inline')
-  Vec.filled(int length, T val) : list = List.filled(length, val);
+  Vec.filled(int length, T val) : list = List.filled(length, val, growable: true);
+
+  @pragma('vm:prefer-inline')
+  Vec.from(Iterable other) : list = List.from(other, growable: true);
+
+  @pragma('vm:prefer-inline')
+  Vec.of(Iterable<T> other) : list = List.of(other, growable: true);
 
   @pragma('vm:prefer-inline')
   T operator [](int index) => list[index];
