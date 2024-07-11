@@ -3,7 +3,7 @@ import 'vec.dart';
 extension VecOnIterableExtension<T> on Iterable<T> {
   @pragma('vm:prefer-inline')
   Vec<T> toVec() {
-    return Vec(toList());
+    return toList();
   }
 }
 
@@ -14,48 +14,20 @@ extension VecOnIteratorExtension<T> on Iterator<T> {
     while (moveNext()) {
       list.add(current);
     }
-    return Vec(list);
-  }
-}
-
-extension VecOnListExtension<T> on List<T> {
-  @pragma('vm:prefer-inline')
-  Vec<T> asVec() {
-    return Vec(this);
+    return list;
   }
 }
 
 extension VecOnListListExtension<T> on List<List<T>> {
   @pragma('vm:prefer-inline')
-  Vec<T> toFlattenedVec() {
-    return Vec(expand((element) => element).toList());
-  }
-}
-
-extension VecOnListVecExtension<T> on List<Vec<T>> {
-  @pragma('vm:prefer-inline')
-  Vec<T> toFlattenedVec() {
-    return Vec(expand((element) => element).toList());
-  }
-}
-
-extension VecOnVecVecExtension<T> on Vec<Vec<T>> {
-  @pragma('vm:prefer-inline')
   Vec<T> flatten() {
-    return Vec(list.expand<T>((element) => element).toList());
-  }
-}
-
-extension VecOnVecListExtension<T> on Vec<List<T>> {
-  @pragma('vm:prefer-inline')
-  Vec<T> flatten() {
-    return Vec(expand<T>((element) => element).toList());
+    return expand((element) => element).toList();
   }
 }
 
 extension VecSetExtension<T> on Set<T> {
   @pragma('vm:prefer-inline')
   Vec<T> toVec() {
-    return Vec(toList());
+    return toList();
   }
 }

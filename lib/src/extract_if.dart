@@ -17,7 +17,7 @@ class ExtractIfIterator<T> implements Iterator<T> {
       final current = _vec[_index];
       if (_test(current)) {
         _current = current;
-        _vec.remove(_index);
+        _vec.removeAt(_index);
         return true;
       } else {
         _index++;
