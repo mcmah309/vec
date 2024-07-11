@@ -2,9 +2,7 @@ import 'vec.dart';
 
 extension VecOnIterableExtension<T> on Iterable<T> {
   @pragma('vm:prefer-inline')
-  Vec<T> toVec() {
-    return toList();
-  }
+  Vec<T> toVec() => toList(growable: true);
 }
 
 extension VecOnIteratorExtension<T> on Iterator<T> {
@@ -22,12 +20,5 @@ extension VecOnListListExtension<T> on List<List<T>> {
   @pragma('vm:prefer-inline')
   Vec<T> flatten() {
     return expand((element) => element).toList();
-  }
-}
-
-extension VecSetExtension<T> on Set<T> {
-  @pragma('vm:prefer-inline')
-  Vec<T> toVec() {
-    return toList();
   }
 }

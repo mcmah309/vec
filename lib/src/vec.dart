@@ -8,10 +8,6 @@ typedef Vec<T> = List<T>;
 
 /// A contiguous **growable** array type, written as Vec<T>, short for ‘vector’.
 extension ListVec<T> on List<T> {
-  @pragma('vm:prefer-inline')
-  Vec<T> asVec() {
-    return this;
-  }
 
 // allocator: will not be implemented
 

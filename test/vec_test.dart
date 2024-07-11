@@ -163,6 +163,5 @@ main() {
     vec(x);
     Vec<Vec<int>> i = [[]];
     i.flatten();
-
   });
 }
