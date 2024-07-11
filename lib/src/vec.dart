@@ -8,7 +8,6 @@ typedef Vec<T> = List<T>;
 
 /// A contiguous **growable** array type, written as Vec<T>, short for ‘vector’.
 extension ListVec<T> on List<T> {
-
 // allocator: will not be implemented
 
   /// Adds all of other's elements to this Vec.
@@ -98,7 +97,8 @@ extension ListVec<T> on List<T> {
   /// If the closure returns true, then the element is removed and yielded. If the closure returns false,
   /// the element will remain in the vector and will not be yielded by the iterator.
   @pragma('vm:prefer-inline')
-  RIterator<T> extractIf(bool Function(T) f) => RIterator.fromIterable(ExtractIfIterable(this, f));
+  RIterator<T> extractIf(bool Function(T) f) =>
+      RIterator.fromIterable(ExtractIfIterable(this, f));
 
 // from_raw_parts: will not be implemented, not possible
 // from_raw_parts_in: will not be implemented, not possible
