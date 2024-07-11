@@ -79,8 +79,8 @@ extension ListVec<T> on List<T> {
 
   /// Removes the element at the given index from the Vec and returns it.
   @pragma('vm:prefer-inline')
-  List<T> drain(int start, int end) {
-    final range = getRange(start, end).toList(growable: false);
+  Vec<T> drain(int start, int end) {
+    final range = getRange(start, end).toList();
     removeRange(start, end);
     return range;
   }
@@ -111,6 +111,7 @@ extension ListVec<T> on List<T> {
 // leak: will not be implemented, not possible
 
   /// Returns the length of the Vec.
+  /// Equivalent to [length].
   @pragma('vm:prefer-inline')
   int len() => length;
 
@@ -127,6 +128,7 @@ extension ListVec<T> on List<T> {
   }
 
   /// Appends an element to the end of the Vec.
+  /// Equivalent to [add].
   @pragma('vm:prefer-inline')
   void push(T element) => add(element);
 
@@ -167,6 +169,7 @@ extension ListVec<T> on List<T> {
   }
 
   /// Retains only the elements specified by the predicate where the result is true.
+  /// Equivalent to [retainWhere].
   @pragma('vm:prefer-inline')
   void retain(bool Function(T) f) => retainWhere(f);
 
@@ -224,13 +227,7 @@ extension ListVec<T> on List<T> {
 
   /// Returns the first element of an iterator, None if empty.
   @pragma('vm:prefer-inline')
-  Option<T> firstOrOption() {
-    final first = firstOrNull;
-    if (first == null) {
-      return None;
-    }
-    return Some(first);
-  }
+  Option<T> firstOrOption() => Option.from(firstOrNull);
 
 // isEmpty: implemented by List
 // isNotEmpty: implemented by List
@@ -241,15 +238,5 @@ extension ListVec<T> on List<T> {
 
   /// Returns the single element of an iterator, None if this is empty or has more than one element.
   @pragma('vm:prefer-inline')
-  Option<T> singleOrOption() {
-    final firstTwo = take(2).iterator;
-    if (!firstTwo.moveNext()) {
-      return None;
-    }
-    final first = firstTwo.current;
-    if (!firstTwo.moveNext()) {
-      return Some(first);
-    }
-    return None;
-  }
+  Option<T> singleOrOption() => Option.from(singleOrNull);
 }
