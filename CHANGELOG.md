@@ -1,3 +1,7 @@
+## 0.3.0
+
+- Change `Vec` to a typedef
+
 ## 0.2.2
 
 - Doc update
